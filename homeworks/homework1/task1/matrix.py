@@ -29,15 +29,15 @@ class Matrix:
 
     def __eq__(self, other):
         return isinstance(other, Matrix) and all(
-            [abs(x - y) <= self.__equality_delta for x, y in zip(row_1, row_2)]
-            for row_1, row_2 in zip(self.__values, other.__values)
+            all(abs(x - y) <= self.__equality_delta for x, y in zip(row_x, row_y))
+            for row_x, row_y in zip(self.__values, other.__values)
         )
 
     def __add__(self, other: "Matrix") -> "Matrix":
         if self.size != other.size:
             raise ValueError("Matrix sizes aren't suitable for addition.")
 
-        return Matrix(*[[x + y for x, y in zip(row_1, row_2)] for row_1, row_2 in zip(self.__values, other.__values)])
+        return Matrix(*[[x + y for x, y in zip(row_x, row_y)] for row_x, row_y in zip(self.__values, other.__values)])
 
     def transpose(self) -> "Matrix":
         return Matrix(*[list(column) for column in zip(*self.__values)])

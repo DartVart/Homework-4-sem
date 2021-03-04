@@ -52,7 +52,7 @@ class MatrixTestCase(unittest.TestCase):
     def test_transpose(self):
         matrix = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
 
-        transposed_matrix = Matrix([2.0, 3.0], [4.0, 1.0], [6.0, 9.0])
+        transposed_matrix = Matrix([2.0, 3.0], [4.0, 1.0], [6.0, 9.0]).transpose()
         self.assertEqual(matrix, transposed_matrix)
 
     def test_add_right_sizes_1(self):
@@ -71,7 +71,7 @@ class MatrixTestCase(unittest.TestCase):
 
         result = Matrix(
             [-435.454 + 23.876, 3452.453 + 234.256],
-            [-346.699667 - 23.2342, -231.454 + 3453.454],
+            [-323.46547 - 23.2342, -231.454 + 3453.454],
             [23425.453 - 5665.13, -234.696 - 3.65396],
             [574.23 + 1235.432, -234.765 - 56.524],
         )

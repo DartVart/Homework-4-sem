@@ -23,8 +23,6 @@ class Vector:
     def angle(self, other: "Vector") -> float:
         """Returns the angle in radians"""
         if self.norm() == 0.0 or other.norm() == 0.0:
-            raise ZeroDivisionError(
-                "Can't find angle between zero vector and some other."
-            )
+            raise ZeroDivisionError("Can't find angle between zero vector and some other.")
 
         return acos(self.dot(other) / (self.norm() * other.norm()))

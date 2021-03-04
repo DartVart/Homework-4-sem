@@ -37,12 +37,7 @@ class Matrix:
         if self.size != other.size:
             raise ValueError("Matrix sizes aren't suitable for addition.")
 
-        return Matrix(
-            *[
-                [x + y for x, y in zip(row_1, row_2)]
-                for row_1, row_2 in zip(self.__values, other.__values)
-            ]
-        )
+        return Matrix(*[[x + y for x, y in zip(row_1, row_2)] for row_1, row_2 in zip(self.__values, other.__values)])
 
     def transpose(self) -> "Matrix":
         return Matrix(*[list(column) for column in zip(*self.__values)])
@@ -51,11 +46,5 @@ class Matrix:
         if self.size[1] != other.size[0]:
             raise ValueError("Matrix sizes aren't suitable for multiplication.")
         return Matrix(
-            *[
-                [
-                    Vector(*row).dot(Vector(*column))
-                    for column in other.transpose().__values
-                ]
-                for row in self.__values
-            ]
+            *[[Vector(*row).dot(Vector(*column)) for column in other.transpose().__values] for row in self.__values]
         )

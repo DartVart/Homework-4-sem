@@ -18,21 +18,21 @@ class MatrixTestCase(unittest.TestCase):
 
     def test_trying_to_define_matrix_with_different_row_sizes(self):
         with self.assertRaises(ValueError) as context:
-            Matrix([1.0, 2.0, 3.0], [4.0, 5.0])
+            Matrix([1, 2, 3], [4, 5])
 
         self.assertTrue("Rows in the matrix must be the same length." in str(context.exception))
 
     def test_size_singled_value_matrix(self):
-        self.assertEqual(Matrix([1.0]).size, (1, 1))
+        self.assertEqual(Matrix([1]).size, (1, 1))
 
     def test_size_simple_matrix(self):
-        matrix = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
+        matrix = Matrix([2, 4, 6], [3, 1, 9])
         self.assertEqual(matrix.size, (2, 3))
 
     def test_add_different_number_of_columns(self):
-        matrix_1 = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
+        matrix_1 = Matrix([2, 4, 6], [3, 1, 9])
 
-        matrix_2 = Matrix([2.0, 4.0], [3.0, 1.0])
+        matrix_2 = Matrix([2, 4], [3, 1])
 
         with self.assertRaises(ValueError) as context:
             matrix_1 + matrix_2
@@ -40,9 +40,9 @@ class MatrixTestCase(unittest.TestCase):
         self.assertTrue("Matrix sizes aren't suitable for addition." in str(context.exception))
 
     def test_add_different_number_of_rows(self):
-        matrix_1 = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
+        matrix_1 = Matrix([2, 4, 6], [3, 1, 9])
 
-        matrix_2 = Matrix([2.0, 4.0, 5.0], [3.0, 1.0, 40.4], [1.2, -4.04, 3.0])
+        matrix_2 = Matrix([2, 4, 5], [3, 1, 40.4], [1.2, -44, 3])
 
         with self.assertRaises(ValueError) as context:
             matrix_1 + matrix_2
@@ -50,17 +50,17 @@ class MatrixTestCase(unittest.TestCase):
         self.assertTrue("Matrix sizes aren't suitable for addition." in str(context.exception))
 
     def test_transpose(self):
-        matrix = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
+        matrix = Matrix([2, 4, 6], [3, 1, 9])
 
-        transposed_matrix = Matrix([2.0, 3.0], [4.0, 1.0], [6.0, 9.0]).transpose()
+        transposed_matrix = Matrix([2, 3], [4, 1], [6, 9]).transpose()
         self.assertEqual(matrix, transposed_matrix)
 
     def test_add_right_sizes_1(self):
-        matrix_1 = Matrix([2.0, 4.0, 6.0], [3.0, 1.0, 9.0])
+        matrix_1 = Matrix([2, 4, 6], [3, 1, 9])
 
-        matrix_2 = Matrix([2.0, 4.0, 5.0], [3.0, 1.0, 5.0])
+        matrix_2 = Matrix([2, 4, 5], [3, 1, 5])
 
-        result = Matrix([4.0, 8.0, 11.0], [6.0, 2.0, 14.0])
+        result = Matrix([4, 8, 11], [6, 2, 14])
 
         self.assertEqual(matrix_1 + matrix_2, result)
 
@@ -78,9 +78,9 @@ class MatrixTestCase(unittest.TestCase):
         self.assertEqual(matrix_1 + matrix_2, result)
 
     def test_mul_wrong_sizes(self):
-        matrix_1 = Matrix([1.0, 3.0], [3.3, 1.0])
+        matrix_1 = Matrix([1, 3], [3.3, 1])
 
-        matrix_2 = Matrix([4.0, 1.0, 3.0], [3.0, 1.0, 1.0], [4.0, 5.0, 1.0])
+        matrix_2 = Matrix([4, 1, 3], [3, 1, 1], [4, 5, 1])
 
         with self.assertRaises(ValueError) as context:
             matrix_1 * matrix_2
@@ -88,11 +88,11 @@ class MatrixTestCase(unittest.TestCase):
         self.assertTrue("Matrix sizes aren't suitable for multiplication." in str(context.exception))
 
     def test_mul_right_sizes_1(self):
-        matrix_1 = Matrix([1.0, 3.0], [3.0, 1.0])
+        matrix_1 = Matrix([1, 3], [3, 1])
 
-        matrix_2 = Matrix([4.0, 1.0, 3.0], [3.0, 1.0, 1.0])
+        matrix_2 = Matrix([4, 1, 3], [3, 1, 1])
 
-        result = Matrix([13.0, 4.0, 6.0], [15.0, 4.0, 10.0])
+        result = Matrix([13, 4, 6], [15, 4, 10])
 
         self.assertEqual(matrix_1 * matrix_2, result)
 

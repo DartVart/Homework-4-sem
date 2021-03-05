@@ -59,7 +59,7 @@ class VectorTestCase(unittest.TestCase):
         with self.assertRaises(ZeroDivisionError) as context:
             vector_1.angle(vector_2)
 
-        self.assertTrue("Can't find angle between zero vector and some other." in str(context.exception))
+        self.assertTrue("Can't find an angle between a zero vector and some other." in str(context.exception))
 
     def test_angle_same_dimensions_1(self):
         vector_1 = Vector(1, 3, 101, 3)

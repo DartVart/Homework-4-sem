@@ -21,16 +21,12 @@ def memoize(function: Optional[Callable] = None, *, size: int = 0) -> Callable:
 
 
 class FunctionMemoizer:
-    _function: Callable
-    _size: int
-    _cache: OrderedDictType
-
-    def __init__(self, function=None, *, size: int = 0):
+    def __init__(self, function: Callable, *, size: int = 0):
         if size < 0:
             raise ValueError("The size cannot be negative.")
 
         self._size = size
-        self._cache = OrderedDict()
+        self._cache: OrderedDictType = OrderedDict()
         self._function = function
         update_wrapper(self, function)
 

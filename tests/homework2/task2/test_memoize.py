@@ -46,7 +46,7 @@ class MemoizeTestCase(TestCase):
         self.assertEqual(f._cache, OrderedDict([((10, 2), 100), ((("x", 2), ("y", 3)), 8)]))
 
     def test_runs_more_than_cache_size(self):
-        @memoize(size=1)
+        @memoize(size=2)
         def f(x, y):
             return x ** y
 

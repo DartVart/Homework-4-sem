@@ -1,7 +1,7 @@
 from copy import deepcopy
 from typing import TypeVar, Generic, Optional, Callable
 
-T = TypeVar("T", covariant=True)
+T = TypeVar("T")
 
 
 class SmartArgument(Generic[T]):

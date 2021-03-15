@@ -14,7 +14,7 @@ def check_error_message(context, message: str) -> bool:
     return message in str(context.exception)
 
 
-@smart_args(need_to_handle_positional_args=True)
+@smart_args(positional_args_included=True)
 def check_isolation_with_named_and_positionals(a, b=4, list_1=Isolated(), *args, c="some", list_2=Isolated(), d=100):
     list_1[0] = -10
     list_2[0] = 100
@@ -43,7 +43,7 @@ class TestIsolated(TestCase):
         self.assertEqual(no_mutable_list_1, ["a"])
 
     def test_only_positional(self):
-        @smart_args(need_to_handle_positional_args=True)
+        @smart_args(positional_args_included=True)
         def check_isolation(input_dict=Isolated()):
             input_dict["a"] = "B"
 
@@ -101,7 +101,7 @@ class TestEvaluated(TestCase):
         self.assertEqual(check_evaluation(), 2)
 
     def test_named_and_positionals(self):
-        @smart_args(need_to_handle_positional_args=True)
+        @smart_args(positional_args_included=True)
         def check_evaluation_with_named_and_positionals(
             b=4, x=Evaluated(get_counter()), *, c="some", y=Evaluated(get_counter()), d=100
         ):
@@ -111,7 +111,7 @@ class TestEvaluated(TestCase):
         self.assertEqual(check_evaluation_with_named_and_positionals(), (2, 2))
 
     def test_only_positional(self):
-        @smart_args(need_to_handle_positional_args=True)
+        @smart_args(positional_args_included=True)
         def check_evaluation(a, c=4, x=Evaluated(get_counter())):
             return x
 

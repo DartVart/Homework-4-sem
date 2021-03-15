@@ -6,22 +6,22 @@ from homeworks.homework2.task3.smart_args import Isolated, Evaluated, SmartArgum
 
 
 class SmartArgsHandler:
-    def __init__(self, function: Callable, need_to_handle_positional_args: bool = False):
+    def __init__(self, function: Callable, positional_args_included: bool = False):
         """Handles smart function arguments
 
         :param function: function that can contain smart arguments
-        :param need_to_handle_positional_args: if False, then only kwargs-only parameters will be processed.
+        :param positional_args_included: if False, then only kwargs-only parameters will be processed.
              All other parameters, including those that can be both positional and named,
              are considered positional here. This is consistent with the module inspect documentation.
         """
-        self.__need_to_handle_positional_args = need_to_handle_positional_args
+        self.__positional_args_included = positional_args_included
 
         full_arg_spec = inspect.getfullargspec(function)
         self.__positional_defaults = full_arg_spec.defaults or ()
         self.__positional_args = full_arg_spec.args
         self.__kwonly_defaults = full_arg_spec.kwonlydefaults or {}
 
-        if not self.__need_to_handle_positional_args and any(
+        if not self.__positional_args_included and any(
             isinstance(arg, Isolated) or isinstance(arg, Evaluated) for arg in self.__positional_defaults
         ):
             raise ValueError(
@@ -71,21 +71,21 @@ class SmartArgsHandler:
 
         self.__handle_kwonly_args(kwargs)
 
-        if self.__need_to_handle_positional_args:
+        if self.__positional_args_included:
             self.__handle_positional_args(args_as_list, kwargs)
         return self.__function(*args_as_list, **kwargs)
 
 
-def smart_args(function: Optional[Callable] = None, *, need_to_handle_positional_args: bool = False) -> Callable:
+def smart_args(function: Optional[Callable] = None, *, positional_args_included: bool = False) -> Callable:
     """
     Decorator that supports smart argument handling
 
     :param function: function to handle smart arguments
-    :param need_to_handle_positional_args: if False, then only kwargs-only parameters will be processed.
+    :param positional_args_included: if False, then only kwargs-only parameters will be processed.
         All other parameters, including those that can be both positional and named,
         are considered positional here.
     """
     if function is None:
-        return lambda func: SmartArgsHandler(func, need_to_handle_positional_args)
+        return lambda func: SmartArgsHandler(func, positional_args_included)
 
-    return SmartArgsHandler(function, need_to_handle_positional_args)
+    return SmartArgsHandler(function, positional_args_included)

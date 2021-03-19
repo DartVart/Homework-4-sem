@@ -1,9 +1,9 @@
 from functools import update_wrapper
-from typing import Callable, Any, List, Generator, Dict
+from typing import Callable, Any, List, Tuple
 from datetime import datetime
 
 
-def print_usage_statistic(function: Callable) -> Generator[(str, Dict[str, Any]), None, None]:
+def print_usage_statistic(function: Callable):
     if not isinstance(function, Spy):
         raise ValueError("Function not decorated with Spy decorator.")
     for value in function.statistics:
@@ -12,7 +12,7 @@ def print_usage_statistic(function: Callable) -> Generator[(str, Dict[str, Any])
 
 class Spy:
     def __init__(self, function: Callable) -> None:
-        self.statistics: List = []
+        self.statistics: List[Tuple] = []
         self._function = function
         update_wrapper(self, function)
 

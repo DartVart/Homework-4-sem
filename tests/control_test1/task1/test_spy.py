@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime
 
-from control_tests.test1.task1.spy import Spy, print_usage_statistic
+from control_tests.control_test1.task1.spy import print_usage_statistic, Spy
 
 
 class SpyTestCase(unittest.TestCase):

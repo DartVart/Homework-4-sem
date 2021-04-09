@@ -67,7 +67,6 @@ class TreapNode(Generic[K, P]):
             self.right = self.right._get_without_largest()
             return self
 
-        # TODO: return self.left if self.left is not None else None
         return self.left
 
     def get_with_inserted(self, key: K, value: V, priority: Optional[P] = None) -> "TreapNode[K, P]":

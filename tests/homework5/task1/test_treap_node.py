@@ -5,12 +5,12 @@ from homeworks.homework5.task1.treap_node import TreapNode
 from tests.test_utils import check_error_message
 
 
-def is_priorities_correct(node: "TreapNode"):
+def are_priorities_correct(node: "TreapNode"):
     return node is None or (
         (node.left is None or node.left.priority < node.priority)
         and (node.right is None or node.right.priority < node.priority)
-        and is_priorities_correct(node.left)
-        and is_priorities_correct(node.right)
+        and are_priorities_correct(node.left)
+        and are_priorities_correct(node.right)
     )
 
 
@@ -26,12 +26,12 @@ def check_by_min_value(node: "TreapNode", min_value):
     )
 
 
-def is_keys_correct(node: "TreapNode"):
+def are_keys_correct(node: "TreapNode"):
     return node is None or (
         check_by_max_value(node.left, node.key)
         and check_by_min_value(node.right, node.key)
-        and is_keys_correct(node.left)
-        and is_keys_correct(node.right)
+        and are_keys_correct(node.left)
+        and are_keys_correct(node.right)
     )
 
 
@@ -92,11 +92,11 @@ class TreapNodeTestCase(unittest.TestCase):
 
     def test_big_treap_check_priorities(self):
         node = get_big_treap_node()
-        return self.assertTrue(is_priorities_correct(node))
+        return self.assertTrue(are_priorities_correct(node))
 
     def test_big_treap_check_keys(self):
         node = get_big_treap_node()
-        return self.assertTrue(is_keys_correct(node))
+        return self.assertTrue(are_keys_correct(node))
 
     def test_update_no_key_in_treap(self):
         node = TreapNode(10, "100")

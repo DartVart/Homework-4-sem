@@ -1,5 +1,5 @@
 from collections import deque
-from typing import List, Optional
+from typing import List, Optional, Deque
 
 
 def print_line(line: str):
@@ -10,7 +10,7 @@ def tail(file_paths: Optional[List[str]] = None) -> None:
     if file_paths is None:
         print("Enter lines (to display last lines enter 'exit'):")
         line = input()
-        lines_deque = deque(maxlen=10)
+        lines_deque: Deque[str] = deque(maxlen=10)
         while line != "exit":
             lines_deque.append(line)
             line = input()

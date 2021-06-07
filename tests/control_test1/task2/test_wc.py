@@ -2,7 +2,7 @@ import unittest
 
 from control_tests.control_test1.task2.wc_simple import process_file
 
-PATH_TO_DIR_WITH_FILES = 'tests/control_test1/task2/res'
+PATH_TO_DIR_WITH_FILES = "tests/control_test1/task2/res"
 
 
 class WcTestCase(unittest.TestCase):
